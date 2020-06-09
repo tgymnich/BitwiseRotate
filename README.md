@@ -1,6 +1,6 @@
 # BitwiseRotate
 
-A swift package providing a bitwise rotation operators for `FixedWidthInteger` written in a sepcific way to [compile](https://www.godbolt.org/z/jXs92u) to `ror` and `rol` on x86.
+A swift package providing a bitwise rotation operators for `FixedWidthInteger` written in a sepcific way to [compile](https://www.godbolt.org/z/4Ggohy) to `ror` and `rol` on x86.
 
 # Setup
 
