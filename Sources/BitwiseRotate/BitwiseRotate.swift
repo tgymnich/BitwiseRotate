@@ -49,14 +49,14 @@ public extension UInt32 {
     func rotateLeft(_ n: Int) -> UInt32 {
         assert(n < 32)
         if n == 0 { return self }
-        return (self &<< n) | (self &>> (32 &- UInt(truncatingIfNeeded: n)));
+        return (self &<< n) | (self &>> (32 &- UInt(truncatingIfNeeded: n)))
     }
 
     /// Shift the bits to the right. Shifted bits are rotated to the left.
     /// - Parameter n: Number of places to shift.
     /// - Returns: Bits rotated n places to the right.
     func rotateRight(_ n: Int) -> UInt32 {
-        assert(n < 64)
+        assert(n < 32)
         if n == 0 { return self }
         return (self &>> n) | (self &<< (32 &- UInt(truncatingIfNeeded: n)))
     }
@@ -89,14 +89,14 @@ public extension UInt16 {
     func rotateLeft(_ n: Int) -> UInt16 {
         assert(n < 16)
         if n == 0 { return self }
-        return (self &<< n) | (self &>> (16 &- UInt(truncatingIfNeeded: n)));
+        return (self &<< n) | (self &>> (16 &- UInt(truncatingIfNeeded: n)))
     }
 
     /// Shift the bits to the right. Shifted bits are rotated to the left.
     /// - Parameter n: Number of places to shift.
     /// - Returns: Bits rotated n places to the right.
     func rotateRight(_ n: Int) -> UInt16 {
-        assert(n < 64)
+        assert(n < 16)
         if n == 0 { return self }
         return (self &>> n) | (self &<< (16 &- UInt(truncatingIfNeeded: n)))
     }
@@ -130,14 +130,14 @@ public extension UInt8 {
     func rotateLeft(_ n: Int) -> UInt8 {
         assert(n < 8)
         if n == 0 { return self }
-        return (self &<< n) | (self &>> (8 &- UInt(truncatingIfNeeded: n)));
+        return (self &<< n) | (self &>> (8 &- UInt(truncatingIfNeeded: n)))
     }
 
     /// Shift the bits to the right. Shifted bits are rotated to the left.
     /// - Parameter n: Number of places to shift.
     /// - Returns: Bits rotated n places to the right.
     func rotateRight(_ n: Int) -> UInt8 {
-        assert(n < 64)
+        assert(n < 8)
         if n == 0 { return self }
         return (self &>> n) | (self &<< (8 &- UInt(truncatingIfNeeded: n)))
     }
