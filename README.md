@@ -11,6 +11,13 @@ In your Package.swift add:
 
 # Usage
 
+
+## rol
 ```swift
 let someBits: UInt8 = 0b01010100 <<< 3 // returns 0b10100010
+```
+
+## ror
+```swift
+let someBits: UInt8 = 0b01010100 >>> 3 // returns 0b10001010
 ```
