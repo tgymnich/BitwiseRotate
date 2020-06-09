@@ -8,3 +8,9 @@ In your Package.swift add:
 ```swift
 .package(url: "https://github.com/TG908/BitwiseRotate.git", from: "0.0.1")
 ```
+
+# Usage
+
+```swift
+let someBits: UInt8 = 0b01010100 <<< 3 // returns 0b10100010
+```
