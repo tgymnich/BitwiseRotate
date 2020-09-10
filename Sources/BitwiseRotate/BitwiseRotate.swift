@@ -29,7 +29,7 @@ public extension FixedWidthInteger {
     /// Shift the bits to the right. Shifted bits are rotated to the left.
     /// - Parameter n: Number of places to shift.
     mutating func rotatedRight(_ n: Int) {
-        self = rotateLeft(n)
+        self = rotateRight(n)
     }
 
     static func <<<(lhs: Self, n: Int) -> Self {
@@ -70,7 +70,7 @@ public extension FixedWidthInteger where Self == UInt {
     /// Shift the bits to the right. Shifted bits are rotated to the left.
     /// - Parameter n: Number of places to shift.
     mutating func rotatedRight(_ n: Int) {
-        self = rotateLeft(n)
+        self = rotateRight(n)
     }
 
     static func <<<(lhs: Self, n: Int) -> Self {
@@ -110,7 +110,7 @@ public extension FixedWidthInteger where Self == UInt32 {
     /// Shift the bits to the right. Shifted bits are rotated to the left.
     /// - Parameter n: Number of places to shift.
     mutating func rotatedRight(_ n: Int) {
-        self = rotateLeft(n)
+        self = rotateRight(n)
     }
 
     static func <<<(lhs: Self, n: Int) -> Self {
@@ -150,7 +150,7 @@ public extension FixedWidthInteger where Self == UInt16 {
     /// Shift the bits to the right. Shifted bits are rotated to the left.
     /// - Parameter n: Number of places to shift.
     mutating func rotatedRight(_ n: Int) {
-        self = rotateLeft(n)
+        self = rotateRight(n)
     }
 
     static func <<<(lhs: Self, n: Int) -> Self {
@@ -192,7 +192,7 @@ public extension FixedWidthInteger where Self == UInt8 {
     /// Shift the bits to the right. Shifted bits are rotated to the left.
     /// - Parameter n: Number of places to shift.
     mutating func rotatedRight(_ n: Int) {
-        self = rotateLeft(n)
+        self = rotateRight(n)
     }
 
     static func <<<(lhs: Self, n: Int) -> Self {
@@ -229,7 +229,7 @@ public extension FixedWidthInteger where Self == Int {
     /// Shift the bits to the right. Shifted bits are rotated to the left.
     /// - Parameter n: Number of places to shift.
     mutating func rotatedRight(_ n: Int) {
-        self = rotateLeft(n)
+        self = rotateRight(n)
     }
 
     static func <<<(lhs: Self, n: Int) -> Self {
@@ -266,7 +266,7 @@ public extension FixedWidthInteger where Self == Int32 {
     /// Shift the bits to the right. Shifted bits are rotated to the left.
     /// - Parameter n: Number of places to shift.
     mutating func rotatedRight(_ n: Int) {
-        self = rotateLeft(n)
+        self = rotateRight(n)
     }
 
     static func <<<(lhs: Self, n: Int) -> Self {
@@ -303,7 +303,7 @@ public extension FixedWidthInteger where Self == Int16 {
     /// Shift the bits to the right. Shifted bits are rotated to the left.
     /// - Parameter n: Number of places to shift.
     mutating func rotatedRight(_ n: Int) {
-        self = rotateLeft(n)
+        self = rotateRight(n)
     }
 
     static func <<<(lhs: Self, n: Int) -> Self {
@@ -341,7 +341,7 @@ public extension FixedWidthInteger where Self == Int8 {
     /// Shift the bits to the right. Shifted bits are rotated to the left.
     /// - Parameter n: Number of places to shift.
     mutating func rotatedRight(_ n: Int) {
-        self = rotateLeft(n)
+        self = rotateRight(n)
     }
 
     static func <<<(lhs: Self, n: Int) -> Self {
