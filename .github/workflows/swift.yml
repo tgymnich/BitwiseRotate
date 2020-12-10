@@ -12,7 +12,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build
-      run: swift build
+      run: swift build --build-tests
     - name: Test
       run: swift test --enable-code-coverage
     - name: Convert coverage report
