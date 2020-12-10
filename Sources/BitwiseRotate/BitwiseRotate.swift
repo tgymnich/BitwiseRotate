@@ -46,7 +46,7 @@ public extension FixedWidthInteger where Self == UInt {
     /// Shift the bits to the left. Shifted bits are rotated to the right.
     /// - Parameter n: Number of places to shift.
     /// - Returns: Bits rotated n places to the left.
-    func rotateLeft<Other>(_ n: Other) -> Self where Other : BinaryInteger {
+    func rotateLeft(_ n: Int) -> Self {
         assert(n < 64)
         if n == 0 { return self }
         return (self &<< n) | (self &>> (64 &- Self(truncatingIfNeeded: n)))
