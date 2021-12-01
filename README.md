@@ -8,7 +8,7 @@ A swift package providing bitwise rotation operators for `FixedWidthInteger` wri
 
 In your Package.swift add:
 ```swift
-.package(url: "https://github.com/tgymnich/BitwiseRotate.git", from: "0.0.5")
+.package(url: "https://github.com/tgymnich/BitwiseRotate.git", from: "0.0.6")
 ```
 
 # Usage
