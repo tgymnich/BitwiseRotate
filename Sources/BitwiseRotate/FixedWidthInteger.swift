@@ -7,9 +7,9 @@ public extension FixedWidthInteger {
     /// - Returns: Bits rotated n places to the left.
     @inlinable
     func rotateLeft(_ n: Int) -> Self {
-        assert(n < self.bitWidth)
+        assert(n < Self.bitWidth)
         if n == 0 { return self }
-        return (self &<< n) | (self &>> (Self(truncatingIfNeeded: self.bitWidth) &- Self(truncatingIfNeeded: n)))
+        return (self &<< n) | (self &>> (Self(truncatingIfNeeded: Self.bitWidth) &- Self(truncatingIfNeeded: n)))
     }
 
     /// Shift the bits to the right. Shifted bits are rotated to the left.
@@ -17,9 +17,9 @@ public extension FixedWidthInteger {
     /// - Returns: Bits rotated n places to the right.
     @inlinable
     func rotateRight(_ n: Int) -> Self {
-        assert(n < self.bitWidth)
+        assert(n < Self.bitWidth)
         if n == 0 { return self }
-        return (self &>> n) | (self &<< (Self(truncatingIfNeeded: self.bitWidth) &- Self(truncatingIfNeeded: n)))
+        return (self &>> n) | (self &<< (Self(truncatingIfNeeded: Self.bitWidth) &- Self(truncatingIfNeeded: n)))
     }
 
     /// Shift the bits to the left. Shifted bits are rotated to the right.
@@ -48,6 +48,53 @@ public extension FixedWidthInteger {
 }
 
 public extension FixedWidthInteger where Self == UInt {
+
+    /// Shift the bits to the left. Shifted bits are rotated to the right.
+    /// - Parameter n: Number of places to shift.
+    /// - Returns: Bits rotated n places to the left.
+    @inlinable
+    func rotateLeft(_ n: Int) -> Self {
+        assert(n < 64)
+        if n == 0 { return self }
+        return (self &<< n) | (self &>> (64 &- Self(truncatingIfNeeded: n)))
+    }
+
+    /// Shift the bits to the right. Shifted bits are rotated to the left.
+    /// - Parameter n: Number of places to shift.
+    /// - Returns: Bits rotated n places to the right.
+    @inlinable
+    func rotateRight(_ n: Int) -> Self {
+        assert(n < 64)
+        if n == 0 { return self }
+        return (self &>> n) | (self &<< (64 &- Self(truncatingIfNeeded: n)))
+    }
+
+    /// Shift the bits to the left. Shifted bits are rotated to the right.
+    /// - Parameter n: Number of places to shift.
+    @inlinable
+    mutating func rotatedLeft(_ n: Int) {
+        self = rotateLeft(n)
+    }
+
+    /// Shift the bits to the right. Shifted bits are rotated to the left.
+    /// - Parameter n: Number of places to shift.
+    @inlinable
+    mutating func rotatedRight(_ n: Int) {
+        self = rotateRight(n)
+    }
+
+    @inlinable
+    static func <<<(lhs: Self, n: Int) -> Self {
+        return lhs.rotateLeft(n)
+    }
+
+    @inlinable
+    static func >>>(lhs: Self, n: Int) -> Self {
+        return lhs.rotateRight(n)
+    }
+}
+
+public extension FixedWidthInteger where Self == UInt64 {
 
     /// Shift the bits to the left. Shifted bits are rotated to the right.
     /// - Parameter n: Number of places to shift.
@@ -235,6 +282,49 @@ public extension FixedWidthInteger where Self == UInt8 {
 }
 
 public extension FixedWidthInteger where Self == Int {
+
+    /// Shift the bits to the left. Shifted bits are rotated to the right.
+    /// - Parameter n: Number of places to shift.
+    /// - Returns: Bits rotated n places to the left.
+    @inlinable
+    func rotateLeft(_ n: Int) -> Self {
+        return Self(truncatingIfNeeded: UInt(truncatingIfNeeded: self).rotateLeft(n))
+    }
+
+    /// Shift the bits to the right. Shifted bits are rotated to the left.
+    /// - Parameter n: Number of places to shift.
+    /// - Returns: Bits rotated n places to the right.
+    @inlinable
+    func rotateRight(_ n: Int) -> Self {
+        return Self(truncatingIfNeeded: UInt(truncatingIfNeeded: self).rotateRight(n))
+    }
+
+    /// Shift the bits to the left. Shifted bits are rotated to the right.
+    /// - Parameter n: Number of places to shift.
+    @inlinable
+    mutating func rotatedLeft(_ n: Int) {
+        self = rotateLeft(n)
+    }
+
+    /// Shift the bits to the right. Shifted bits are rotated to the left.
+    /// - Parameter n: Number of places to shift.
+    @inlinable
+    mutating func rotatedRight(_ n: Int) {
+        self = rotateRight(n)
+    }
+
+    @inlinable
+    static func <<<(lhs: Self, n: Int) -> Self {
+        return lhs.rotateLeft(n)
+    }
+
+    @inlinable
+    static func >>>(lhs: Self, n: Int) -> Self {
+        return lhs.rotateRight(n)
+    }
+}
+
+public extension FixedWidthInteger where Self == Int64 {
 
     /// Shift the bits to the left. Shifted bits are rotated to the right.
     /// - Parameter n: Number of places to shift.

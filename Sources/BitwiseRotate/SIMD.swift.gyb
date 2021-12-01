@@ -1,0 +1,113 @@
+infix operator >>>
+infix operator <<<
+
+public extension SIMD where Scalar: FixedWidthInteger {
+    /// Shift the bits to the left. Shifted bits are rotated to the right.
+    /// - Parameter n: Number of places to shift.
+    /// - Returns: Bits rotated n places to the left.
+    @inlinable
+    func rotateLeft(_ n: Scalar) -> Self {
+        assert(n < Scalar.bitWidth)
+        if n == 0 { return self }
+        return (self &<< n) | (self &>> (Scalar(truncatingIfNeeded: Scalar.bitWidth) &- Scalar(truncatingIfNeeded: n)))
+    }
+
+    /// Shift the bits to the right. Shifted bits are rotated to the left.
+    /// - Parameter n: Number of places to shift.
+    /// - Returns: Bits rotated n places to the right.
+    @inlinable
+    func rotateRight(_ n: Scalar) -> Self {
+        assert(n < Scalar.bitWidth)
+        if n == 0 { return self }
+        return (self &>> n) | (self &<< (Scalar(truncatingIfNeeded: Scalar.bitWidth) &- Scalar(truncatingIfNeeded: n)))
+    }
+
+    /// Shift the bits to the left. Shifted bits are rotated to the right.
+    /// - Parameter n: Number of places to shift.
+    @inlinable
+    mutating func rotatedLeft(_ n: Scalar) {
+        self = rotateLeft(n)
+    }
+
+    /// Shift the bits to the right. Shifted bits are rotated to the left.
+    /// - Parameter n: Number of places to shift.
+    @inlinable
+    mutating func rotatedRight(_ n: Scalar) {
+        self = rotateRight(n)
+    }
+
+    @inlinable
+    static func <<<(lhs: Self, n: Scalar) -> Self {
+        return lhs.rotateLeft(n)
+    }
+
+    @inlinable
+    static func >>>(lhs: Self, n: Scalar) -> Self {
+        return lhs.rotateRight(n)
+    }
+}
+
+%{
+simd_types = ['SIMD2', 'SIMD3', 'SIMD4', 'SIMD8',
+                 'SIMD16', 'SIMD32', 'SIMD64']
+}%
+
+%{
+scalar_types = ['UInt8', 'UInt16', 'UInt32', 'UInt64', 'UInt',
+                 'Int8', 'Int16', 'Int32', 'Int64', 'Int']
+}%
+
+%{
+bit_widths = {'UInt8': 8, 'UInt16': 16, 'UInt32': 32, 'UInt64': 64, 'UInt': 64,
+                 'Int8': 8, 'Int16': 16, 'Int32': 32, 'Int64': 64, 'Int': 64}
+}%
+
+% for simd in simd_types:
+% for scalar in scalar_types:
+  public extension ${simd} where Scalar == ${scalar} {
+  /// Shift the bits to the left. Shifted bits are rotated to the right.
+  /// - Parameter n: Number of places to shift.
+  /// - Returns: Bits rotated n places to the left.
+  @inlinable
+  func rotateLeft(_ n: Scalar) -> Self {
+      assert(n < ${bit_widths[scalar]})
+      if n == 0 { return self }
+      return (self &<< n) | (self &>> (${bit_widths[scalar]} &- Scalar(truncatingIfNeeded: n)))
+  }
+
+  /// Shift the bits to the right. Shifted bits are rotated to the left.
+  /// - Parameter n: Number of places to shift.
+  /// - Returns: Bits rotated n places to the right.
+  @inlinable
+  func rotateRight(_ n: Scalar) -> Self {
+      assert(n < ${bit_widths[scalar]})
+      if n == 0 { return self }
+      return (self &>> n) | (self &<< (${bit_widths[scalar]} &- Scalar(truncatingIfNeeded: n)))
+  }
+
+  /// Shift the bits to the left. Shifted bits are rotated to the right.
+  /// - Parameter n: Number of places to shift.
+  @inlinable
+  mutating func rotatedLeft(_ n: Scalar) {
+      self = rotateLeft(n)
+  }
+
+  /// Shift the bits to the right. Shifted bits are rotated to the left.
+  /// - Parameter n: Number of places to shift.
+  @inlinable
+  mutating func rotatedRight(_ n: Scalar) {
+      self = rotateRight(n)
+  }
+
+  @inlinable
+  static func <<<(lhs: Self, n: Scalar) -> Self {
+      return lhs.rotateLeft(n)
+  }
+
+  @inlinable
+  static func >>>(lhs: Self, n: Scalar) -> Self {
+      return lhs.rotateRight(n)
+  }
+}
+% end
+% end
