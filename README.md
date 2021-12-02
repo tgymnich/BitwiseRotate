@@ -9,7 +9,7 @@ This package is written in a sepcific way to [compile](https://www.godbolt.org/z
 
 In your Package.swift add:
 ```swift
-.package(url: "https://github.com/tgymnich/BitwiseRotate.git", from: "1.1.0")
+.package(url: "https://github.com/tgymnich/BitwiseRotate.git", from: "1.1.1")
 ```
 
 # Usage
